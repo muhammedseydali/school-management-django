@@ -47,22 +47,22 @@
                     <td>
                       <h2 class="table-avatar">
                         {% if teacher.photo %}
-                        <a href="{% url 'teacher-detail' teacher.id %}" class="avatar avatar-sm mr-2">
+                        <a href="{% url 'teacher-details' teacher.id %}" class="avatar avatar-sm mr-2">
                           <img class="avatar-img rounded-circle" src="{{ teacher.photo.url }}" alt="{{ teacher.full_name }}">
                         </a>
                         {% else %}
-                        <a href="{% url 'teacher-detail' teacher.id %}" class="avatar avatar-sm mr-2">
+                        <a href="{% url 'teacher-details' teacher.id %}" class="avatar avatar-sm mr-2">
                           <img class="avatar-img rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt="{{ teacher.full_name }}">
                         </a>
                         {% endif %}
-                        <a href="{% url 'teacher-detail' teacher.id %}">{{ teacher.full_name }}</a>
+                        <a href="{% url 'teacher-details' teacher.id %}">{{ teacher.full_name }}</a>
                       </h2>
                     </td>
                     <td>{{ teacher.teacher_class }}</td>
                     <td>{{ teacher.gender }}</td>
                     <td>{{ teacher.subject }}</td>
                     <td>{{ teacher.section }}</td>
-                    <td>{{ teacher.mobile }}</td>
+                    <td>{{ teacher.mobile_number }}</td>
                     <td>{{ teacher.address }}</td>
                     <td class="text-right">
                       <div class="actions">
@@ -94,5 +94,10 @@
     <p>Copyright © 2020 Dreamguys.</p>
   </footer>
 </div>
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
 
 {% endblock %}

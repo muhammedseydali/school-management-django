@@ -1,0 +1,121 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+  <div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="page-title">Teacher Detailss</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'teacher-list' %}">Teachers</a></li>
+            <li class="breadcrumb-item active">{{ teacher.first_name }} {{ teacher.last_name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="about-info">
+              <h4>About Me</h4>
+
+              <div class="media mt-3 align-items-center">
+                <img 
+                  src="{% if teacher.teacher_image %}{{ teacher.teacher_image.url }}{% else %}{% static 'assets/img/user.jpg' %}{% endif %}" 
+                  class="mr-3 rounded-circle border" 
+                  alt="{{ teacher.first_name }} {{ teacher.last_name }}" 
+                  width="120" 
+                  height="120"
+                >
+
+                <div class="media-body">
+                  <ul>
+                    <li>
+                      <span class="title-span">Full Name : </span>
+                      <span class="info-span">{{ teacher.first_name }} {{ teacher.last_name }}</span>
+                    </li>
+                    <li>
+                      <span class="title-span">Teacher ID : </span>
+                      <span class="info-span">{{ teacher.teacher_id }}</span>
+                    </li>
+                    {% if teacher.teacher_class %}
+                    <li>
+                      <span class="title-span">Class : </span>
+                      <span class="info-span">{{ teacher.teacher_class }}</span>
+                    </li>
+                    {% endif %}
+                    {% if teacher.section %}
+                    <li>
+                      <span class="title-span">Section : </span>
+                      <span class="info-span">{{ teacher.section }}</span>
+                    </li>
+                    {% endif %}
+                    <li>
+                      <span class="title-span">Subject : </span>
+                      <span class="info-span">{{ teacher.subject }}</span>
+                    </li>
+                    <li>
+                      <span class="title-span">Gender : </span>
+                      <span class="info-span">{{ teacher.gender }}</span>
+                    </li>
+                    <li>
+                      <span class="title-span">Mobile : </span>
+                      <span class="info-span">{{ teacher.mobile_number }}</span>
+                    </li>
+                    <li>
+                      <span class="title-span">Address : </span>
+                      <span class="info-span">{{ teacher.address }}</span>
+                    </li>
+                    <li>
+                      <span class="title-span">Profile Created : </span>
+                      <span class="info-span">{{ teacher.created_at|date:"d M Y" }}</span>
+                    </li>
+                    <li>
+                      <span class="title-span">Last Updated : </span>
+                      <span class="info-span">{{ teacher.updated_at|date:"d M Y" }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Optional Bio Section -->
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <p>Hello, I’m {{ teacher.first_name }} {{ teacher.last_name }}, a passionate {{ teacher.subject }} teacher.</p>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                  <a href="{% url 'teacher-list' %}" class="btn btn-primary">
+                    <i class="fas fa-arrow-left mr-1"></i> Back to Teachers
+                  </a>
+                </div>
+              </div>
+
+            </div> <!-- /about-info -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Copyright © {{ now|date:"Y" }} The Code Club.</p>
+</footer>
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+{% endblock %}
