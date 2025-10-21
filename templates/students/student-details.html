@@ -24,15 +24,23 @@
               <h4>About Student</h4>
               <div class="media mt-3">
                 {% if student.student_image %}
-                  <img src="{{ student.student_image.url }}" class="mr-3 rounded-circle" alt="{{ student.full_name }}" width="120" height="120">
-                {% else %}
-                  <img src="{% static 'assets/img/user.jpg' %}" class="mr-3 rounded-circle" alt="No Image" width="120" height="120">
-                {% endif %}
+                <img src="{{ student.student_image.url }}" 
+                     class="mr-3" 
+                     alt="{{ student.first_name }} {{ student.last_name }}" 
+                     width="150" height="120" 
+                     style="object-fit: contain; border-radius: 5px; border: 1px solid #ccc; background-color:#f0f0f0;">
+              {% else %}
+                <img src="{% static 'assets/img/user.jpg' %}" 
+                     class="mr-3" 
+                     alt="No Image" 
+                     width="150" height="120" 
+                     style="object-fit: contain; border-radius: 5px; border: 1px solid #ccc; background-color:#f0f0f0;">
+              {% endif %}
                 <div class="media-body">
                   <ul>
                     <li>
                       <span class="title-span">Full Name:</span>
-                      <span class="info-span">{{ student.full_name }}</span>
+                      <span class="info-span">{{ student.first_name }} {{student.last_name }}</span>
                     </li>
                     <li>
                       <span class="title-span">Admission Number:</span>
@@ -48,7 +56,7 @@
                     </li>
                     <li>
                       <span class="title-span">Class:</span>
-                      <span class="info-span">{{ student.class_field }}</span>
+                      <span class="info-span">{{ student.student_class }}</span>
                     </li>
                     <li>
                       <span class="title-span">Section:</span>
@@ -56,15 +64,15 @@
                     </li>
                     <li>
                       <span class="title-span">Parent:</span>
-                      <span class="info-span">{{ student.parent.full_name }}</span>
+                      <span class="info-span">{{ student.parent.father_name }}</span>
                     </li>
                     <li>
                       <span class="title-span">Parent Contact:</span>
-                      <span class="info-span">{{ student.parent.phone_number }}</span>
+                      <span class="info-span">{{ student.parent.father_mobile }}</span>
                     </li>
                     <li>
                       <span class="title-span">Parent Email:</span>
-                      <span class="info-span">{{ student.parent.email }}</span>
+                      <span class="info-span">{{ student.parent.father_email }}</span>
                     </li>
                   </ul>
                 </div>

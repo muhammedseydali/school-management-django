@@ -67,15 +67,14 @@
                     <td>
                      <h2 class="table-avatar">
                         <a href="{% url 'student-details' student.student_id %}" class="avatar avatar-sm mr-2">
-                            {% if student.student_image %}
-                                <img class="avatar-img rounded-circle" 
-                                     src="{{ student.student_image.url }}" 
-                                     alt="{{ student.first_name }} {{ student.last_name }}">
-                            {% else %}
-                                <img class="avatar-img rounded-circle" 
-                                     src="{% static 'assets/img/profiles/avatar-01.jpg' %}" 
-                                     alt="Default Image">
-                            {% endif %}
+                           {% if student.student_image %}
+                           <img src="{{ student.student_image.url }}" 
+                                class="mr-3" alt="{{ student.first_name }} {{ student.last_name }}"  width="150" height="120" 
+                                style="object-fit: contain; border-radius: 5px; border: 1px solid #ccc; background-color:#f0f0f0;">
+                         {% else %}
+                           <img src="{% static 'assets/img/user.jpg' %}" class="mr-3"  alt="No Image"  width="150" height="120"  
+                           style="object-fit: contain; border-radius: 5px; border: 1px solid #ccc; background-color:#f0f0f0;">
+                         {% endif %}
                         </a>
                         <a href="{% url 'student-details' student.student_id%}">
                             {{ student.first_name }} {{ student.last_name }}
@@ -89,10 +88,10 @@
                     <td>{{ student.parent.present_address }}</td>
                     <td class="text-right">
                       <div class="actions">
-                        <a href="#" class="btn btn-sm bg-success-light mr-2">
+                        <a href="{% url 'edit-student' student.student_id %}" class="btn btn-sm bg-success-light mr-2">
                           <i class="fas fa-pen"></i>
                         </a>
-                        <a href="#" class="btn btn-sm bg-danger-light">
+                        <a href="{% url 'delete-student' student.student_id %}" class="btn btn-sm bg-danger-light">
                           <i class="fas fa-trash"></i>
                         </a>
                       </div>

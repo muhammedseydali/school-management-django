@@ -149,16 +149,17 @@
                         <ul>
                            <li><a href="{% url 'student-list' %}">Student List</a></li>
                            <li><a href="{% url 'add-student' %}">Student Add</a></li>
-                           <li><a href="{% url 'edit-student' %}">Student Edit</a></li>
+                           {% if student %}
+                           <li><a href="{% url 'edit-student' student.student_id %}">Edit Student</a></li>
+                       {% endif %}                        
                         </ul>
                      </li>
                      <li class="submenu">
                         <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="teachers.html">Teacher List</a></li>
-                           <li><a href="teacher-details.html">Teacher View</a></li>
-                           <li><a href="add-teacher.html">Teacher Add</a></li>
-                           <li><a href="edit-teacher.html">Teacher Edit</a></li>
+                           <li><a href="{% url 'teacher-list' %}">Teacher List</a></li>
+                           <li><a href="{% url 'teacher-list' %}">Teacher View</a></li>
+                           <li><a href="{% url 'add-teacher' %}">Teacher Add</a></li>
                         </ul>
                      </li>
                      <li class="submenu">

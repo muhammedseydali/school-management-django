@@ -1,0 +1,98 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+  <div class="content container-fluid">
+
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Teachers</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Teachers</li>
+          </ul>
+        </div>
+        <div class="col-auto text-right ml-auto">
+          <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
+          <a href="{% url 'add-teacher' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-table">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-center mb-0 datatable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Gender</th>
+                    <th>Subject</th>
+                    <th>Section</th>
+                    <th>Mobile Number</th>
+                    <th>Address</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for teacher in teachers %}
+                  <tr>
+                    <td>{{ teacher.teacher_id }}</td>
+                    <td>
+                      <h2 class="table-avatar">
+                        {% if teacher.photo %}
+                        <a href="{% url 'teacher-detail' teacher.id %}" class="avatar avatar-sm mr-2">
+                          <img class="avatar-img rounded-circle" src="{{ teacher.photo.url }}" alt="{{ teacher.full_name }}">
+                        </a>
+                        {% else %}
+                        <a href="{% url 'teacher-detail' teacher.id %}" class="avatar avatar-sm mr-2">
+                          <img class="avatar-img rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt="{{ teacher.full_name }}">
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'teacher-detail' teacher.id %}">{{ teacher.full_name }}</a>
+                      </h2>
+                    </td>
+                    <td>{{ teacher.teacher_class }}</td>
+                    <td>{{ teacher.gender }}</td>
+                    <td>{{ teacher.subject }}</td>
+                    <td>{{ teacher.section }}</td>
+                    <td>{{ teacher.mobile }}</td>
+                    <td>{{ teacher.address }}</td>
+                    <td class="text-right">
+                      <div class="actions">
+                        <a href="{% url 'edit-teacher' teacher.id %}" class="btn btn-sm bg-success-light mr-2">
+                          <i class="fas fa-pen"></i>
+                        </a>
+                        <a href="{% url 'delete-teacher' teacher.id %}" class="btn btn-sm bg-danger-light">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="9" class="text-center">No teachers found.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Copyright © 2020 Dreamguys.</p>
+  </footer>
+</div>
+
+{% endblock %}

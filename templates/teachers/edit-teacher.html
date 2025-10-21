@@ -1,0 +1,53 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+  <div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Edit Teacher</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'teacher-list' %}">Teachers</a></li>
+            <li class="breadcrumb-item active">Edit Teacher</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <!-- Display form fields dynamically -->
+              {% for field in form %}
+              <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                  <div class="text-danger">{{ field.errors }}</div>
+                {% endif %}
+              </div>
+              {% endfor %}
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
