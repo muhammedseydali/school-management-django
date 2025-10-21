@@ -1,0 +1,114 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+  <div class="content container-fluid">
+
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="page-title">Welcome {{ teacher.first_name }}!</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'teacher-list' %}">Teachers</a></li>
+            <li class="breadcrumb-item active">Teacher Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-five w-100">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-icon"><i class="fas fa-chalkboard"></i></div>
+              <div class="db-info">
+                <h3>{{ total_classes }}</h3>
+                <h6>Total Classes</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-six w-100">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-icon"><i class="fas fa-user-graduate"></i></div>
+              <div class="db-info">
+                <h3>{{ total_students }}</h3>
+                <h6>Total Students</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-seven w-100">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-icon"><i class="fas fa-book-open"></i></div>
+              <div class="db-info">
+                <h3>{{ completed_lessons }}/{{ total_lessons }}</h3>
+                <h6>Total Lessons</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-eight w-100">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-icon"><i class="fas fa-clock"></i></div>
+              <div class="db-info">
+                <h3>{{ total_hours }}</h3>
+                <h6>Total Hours</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semester Progress -->
+    <div class="row mt-4">
+      <div class="col-lg-6 col-xl-4">
+        <div class="card flex-fill">
+          <div class="card-header">
+            <h5 class="card-title">Semester Progress</h5>
+          </div>
+          <div class="dash-widget text-center">
+            <div class="circle-bar circle-bar1">
+              <div class="circle-graph1" data-percent="{{ lesson_progress }}">
+                <b>{{ lesson_progress }}%</b>
+              </div>
+            </div>
+            <div class="dash-info">
+              <h6>Lesson Progressed</h6>
+              <h4>{{ completed_lessons }} <span>/ {{ total_lessons }}</span></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Copyright © {{ now|date:"Y" }} The Code Club.</p>
+</footer>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+{% endblock %}

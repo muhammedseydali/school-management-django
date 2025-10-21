@@ -67,29 +67,53 @@ def add_student(request):
                                                 parent=parent_data
                                                 )
             messages.success(request, f"Student '{first_name} {last_name}' added successfully.")
-            return redirect('student_list')
+            return redirect('student-list')
 
         except IntegrityError as e:
             messages.error(request, f"Database error: {e}")
             return render(request, 'students/add-student.html')
 
-        
-
-
-
     return render(request, 'students/add-student.html')
 
+
 def student_list(request):
+    try:
+        student_list = Student.objects.select_related('parent').all()
+        context = {
+            'student_list': student_list
+        }
+        return render(request, 'students/students.html', context)
+    except Exception as e:
+        messages.error(request, f"Error fetching student list: {e}")
+        # Return an empty list so template can still render
+        return render(request, 'students/students.html', {'student_list': []})
+    
 
-    student_list = Student.objects.select_related('parent').all()
+def edit_student(request, slug):
+    try:
+        student = Student.objects.get(student_id=slug)
+    except Student.DoesNotExist:
+        messages.error(request, f"No student found with ID '{slug}'.")
+        return redirect('student-list')  # Redirect if student not found
 
-    context = {
-        'student_list':student_list
-    }
-    return render(request, 'students/students.html', context)
+    if request.method == 'POST':
+        # Example: updating student details from form data
+        try:
+            student.first_name = request.POST.get('first_name', student.first_name)
+            student.last_name = request.POST.get('last_name', student.last_name)
+            student.gender = request.POST.get('gender', student.gender)
+            student.date_of_birth = request.POST.get('date_of_birth', student.date_of_birth)
+            student.student_class = request.POST.get('student_class', student.student_class)
+            student.section = request.POST.get('section', student.section)
+            student.save()
+            
+            messages.success(request, f"Student '{student.first_name} {student.last_name}' updated successfully.")
+            return redirect('student-details', slug=student.student_id)
+        except Exception as e:
+            messages.error(request, f"Error updating student: {e}")
+            return render(request, 'students/edit-student.html', {'student': student})
 
-def edit_student(request):
-    return render(request, 'students/edit-student.html')
+    return render(request, 'students/edit-student.html', {'student': student})
 
 def view_student(request, slug):
     try:
@@ -101,3 +125,25 @@ def view_student(request, slug):
     except Student.DoesNotExist:
         messages.error(request, f"No student found with ID '{slug}'.")
         return render(request, 'students/student-details.html', context={})
+    
+def delete_student(request, slug):
+    try:
+        student = Student.objects.get(student_id=slug)
+        student_name = f"{student.first_name} {student.last_name}"
+
+        # Optional: delete parent if you want to remove parent's record as well
+        parent = student.parent
+        student.delete()
+        if parent:
+            parent.delete()
+
+        messages.success(request, f"Student '{student_name}' has been deleted successfully.")
+        return redirect('student-list')
+
+    except Student.DoesNotExist:
+        messages.error(request, f"No student found with ID '{slug}'.")
+        return redirect('student-list')
+
+    except Exception as e:
+        messages.error(request, f"Error deleting student: {e}")
+        return redirect('student-list')
