@@ -1,0 +1,59 @@
+# === Python cache ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+
+# === Virtual environments ===
+venv/
+env/
+.venv/
+
+# === Django specific ===
+*.log
+*.pot
+*.pyc
+*.mo
+*.sqlite3
+media/
+staticfiles/
+
+# === Environment & config files ===
+.env
+.env.*
+*.pem
+*.crt
+*.key
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# === Git ===
+.git/
+.gitignore
+
+# === Docker ===
+Dockerfile
+docker-compose.yml
+
+# === Tests & Docs ===
+tests/
+docs/
+
+# === Node / Frontend (if present) ===
+node_modules/
+npm-debug.log
+yarn-error.log
+build/
+dist/
